@@ -10,7 +10,7 @@ const HoverButton = ({text, icon, href}) => {
         aria-label="Click to navigate"
     >
         <motion.button
-            className="relative cursor-pointer overflow-hidden md:bg-transparent  bg-purple-600 text-purple-600 border hover:text-white border-purple-600 border-solid md:px-8 md:py-2 p-2 px-6 rounded-lg font-semibold"
+            className="relative cursor-pointer overflow-hidden md:bg-transparent  bg-purple-600 md:text-purple-600 text-white border hover:text-white border-purple-600 border-solid md:px-8 md:py-2 p-2 px-6 rounded-lg font-semibold"
         
             whileHover="hover"
             transition={{ duration: 0.5 }}

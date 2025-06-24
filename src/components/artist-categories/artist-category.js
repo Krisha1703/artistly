@@ -2,36 +2,50 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArtistData } from "@/data/artists";
 import SlideArrow from "./slide-arrow";
 import Heading from "../heading";
 import ArtistCard from "../explore-artists/artist-card";
 
-const itemsPerPage = 4;
-
 const ArtistCategoriesSection = () => {
   const [startIndex, setStartIndex] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(4);
+
+  // Handle responsive itemsPerPage
+  useEffect(() => {
+    const updateItems = () => {
+      if (window.innerWidth < 768) {
+        setItemsPerPage(1); // sm screens: 1 item
+      } else {
+        setItemsPerPage(4); // md and above: 4 items
+      }
+    };
+
+    updateItems(); 
+    window.addEventListener("resize", updateItems);
+    return () => window.removeEventListener("resize", updateItems);
+  }, []);
 
   const handleNext = () => {
     if (startIndex + itemsPerPage < ArtistData.length) {
-      setStartIndex(startIndex + 1);
+      setStartIndex(startIndex + itemsPerPage);
     }
   };
 
   const handlePrev = () => {
     if (startIndex > 0) {
-      setStartIndex(startIndex - 1);
+      setStartIndex(startIndex - itemsPerPage);
     }
   };
 
   return (
     <section className="py-16 px-6 relative">
       <div className="max-w-6xl mx-auto">
-        <Heading 
-          prefix="Popular" 
-          focus="Artist" 
-          suffix="Categories" 
+        <Heading
+          prefix="Popular"
+          focus="Artist"
+          suffix="Categories"
           subheading={true}
         />
 

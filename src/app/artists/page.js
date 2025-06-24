@@ -1,6 +1,6 @@
 "use client"
 import { memo } from "react";
-import dynamic from "next/dynamic";;
+import dynamic from "next/dynamic";
 
 // Dynamically imported components
 const Navbar = dynamic(() => import("@/components/navbar/navbar"), { ssr: false });

@@ -21,7 +21,7 @@ const AnalyticsCharts = () => {
   return (
     <div className="space-y-10">
         <div className="flex md:justify-between flex-col md:flex-row gap-6">
-            <>
+            <div>
                 <h3 className="text-xl font-bold text-purple-700 mb-4">Artist Category Distribution</h3>
                 <ResponsiveContainer width="100%" height={300}>
                 <PieChart>
@@ -41,9 +41,9 @@ const AnalyticsCharts = () => {
                     <Legend />
                 </PieChart>
                 </ResponsiveContainer>
-            </>
+            </div>
 
-            <>
+            <div>
                 <h3 className="text-xl font-bold text-purple-700 mb-4">Submissions vs Bookings by Category</h3>
                 <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={stackedData}>
@@ -55,9 +55,9 @@ const AnalyticsCharts = () => {
                     <Bar dataKey="bookings" stackId="a" fill="#7c3aed" />
                 </BarChart>
                 </ResponsiveContainer>
-            </>
+            </div>
 
-            <>
+            <div>
                 <h3 className="text-xl font-bold text-purple-700 mb-4">Artist Submissions by Location</h3>
                 <ResponsiveContainer width="100%" height={300}>
                 <PieChart>
@@ -78,7 +78,7 @@ const AnalyticsCharts = () => {
                     <Legend />
                 </PieChart>
                 </ResponsiveContainer>
-            </>
+            </div>
       </div>
 
     </div>
