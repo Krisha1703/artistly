@@ -80,7 +80,7 @@ const ExploreArtists = () => {
         <aside
           className={`z-50 transition-transform duration-500
             fixed top-0 left-0 w-3/4 h-auto p-0
-            md:static md:w-1/4 md:h-auto md:p-0 bg-white
+            md:static md:w-1/4 md:h-auto md:p-0 filter-panel
             transform ${
               isMobileFilterOpen ? "translate-x-10 translate-y-20" : "-translate-x-full md:translate-x-0"
             }`}

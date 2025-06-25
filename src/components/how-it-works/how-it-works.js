@@ -31,7 +31,7 @@ const HowItWorks = () => {
   }, [scrollYProgress]);
 
   return (
-    <section className="px-6 py-10 bg-white" ref={ref}>
+    <section className="px-6 py-10 " ref={ref}>
       <Heading 
         prefix="How" 
         focus="It Works" 
@@ -55,22 +55,20 @@ const HowItWorks = () => {
                 )}
               </div>
 
-              {/* Vertical Line on mobile */}
-              {i < steps.length - 1 && (
-                <div className="block sm:hidden w-px h-[15vh] bg-gray-300 mt-1"></div>
-              )}
+              {/* Vertical line (mobile) */}
+              <div className="block sm:hidden w-px h-[15vh] step-line mt-1"></div>
 
-              {/* Horizontal Line on desktop */}
-              {i < steps.length - 1 && (
-                <div className="hidden sm:block absolute top-5 left-10 w-10/12 h-0.5 bg-gray-200 z-0"></div>
-              )}
+              {/* Horizontal line (desktop) */}
+              <div className="hidden sm:block absolute top-5 left-10 w-10/12 h-0.5 step-line z-0"></div>
+
             </div>
 
             {/* Step content */}
             <div className="ml-6 sm:ml-0 mt-2 sm:mt-6 text-left sm:text-left">
               <div className="text-4xl mb-2 mt-5">{step.icon}</div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-1">{step.title}</h3>
-              <p className="text-gray-600 max-w-xs">{step.desc}</p>
+              <h3 className="step-title">{step.title}</h3>
+              <p className="step-desc">{step.desc}</p>
+
             </div>
           </li>
         ))}

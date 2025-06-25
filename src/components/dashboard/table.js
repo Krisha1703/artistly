@@ -3,7 +3,7 @@
 const Table = ({ columns, data, actions }) => {
   return (
     <div className="overflow-x-auto rounded shadow">
-      <table className="min-w-full text-sm border">
+      <table className="custom-dashboard-table min-w-full text-sm border">
         <thead className="bg-purple-600 text-white">
           <tr>
             {columns.map((col) => (

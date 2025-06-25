@@ -9,7 +9,7 @@ export default function MediaIcons({ icon, href }) {
             whileHover={{ rotate: 360 }}
             transition={{ duration: 0.5 }}
             aria-label="Social Media Icon"
-            className="text-purple-600 hover:text-purple-500 text-xl md:scale-115 scale-125"
+            className="nav-menu-item text-xl md:scale-115 scale-125"
         >
             {icon}
         </motion.a>

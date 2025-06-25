@@ -26,8 +26,7 @@ const FilterPanel = ({
       className={`
         space-y-5 text-md
         rounded-xl p-6 shadow-lg
-       
-        text-purple-700
+        nav-menu-item
         max-h-full
         overflow-auto
         ${isMobile ? "h-full" : "h-auto"}

@@ -46,7 +46,7 @@ export default function ArtistOnboardingForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="max-w-3xl mx-auto p-8 bg-white/80 backdrop-blur-lg border my-10 border-purple-200 shadow-2xl rounded-2xl space-y-8 text-gray-800"
+      className="max-w-3xl mx-auto p-8 body/80 backdrop-blur-lg border my-10 border-purple-200 shadow-2xl rounded-2xl space-y-8 "
     >
         <h2 className="text-3xl font-bold text-purple-700 text-center">
         🎭 Artist Onboarding Form

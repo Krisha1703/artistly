@@ -23,11 +23,11 @@ const Footer = () => {
   };
 
   return (
-    <footer className="footer relative bg-purple-50 text-gray-800">
+    <footer className="footer relative navbar">
       <div className="container w-11/12 mx-auto grid grid-cols-1 md:grid-cols-5 gap-6 text-center md:text-left py-10 px-5">
         {/* Explore */}
         <motion.div initial="hidden" animate="visible" custom="left" variants={variants}>
-          <h3 className="text-purple-700 font-bold text-lg mb-4 md:scale-100 scale-125">Explore</h3>
+          <h3 className=" font-bold text-lg mb-4 md:scale-100 scale-125">Explore</h3>
           <ul>
             <FooterMenus Menu="Home" Route="/" />
             <FooterMenus Menu="About Artistly" Route="/" />
@@ -39,7 +39,7 @@ const Footer = () => {
 
         {/* Help */}
         <motion.div initial="hidden" animate="visible" custom="left" variants={variants}>
-          <h3 className="text-purple-700 font-bold text-lg mb-4 md:scale-100 scale-125">Help</h3>
+          <h3 className=" font-bold text-lg mb-4 md:scale-100 scale-125">Help</h3>
           <ul>
             <FooterMenus Menu="How It Works" Route="/" />
             <FooterMenus Menu="Booking Policy" Route="/" />
@@ -51,7 +51,7 @@ const Footer = () => {
 
         {/* Contact */}
         <motion.div initial="hidden" animate="visible" custom="top" variants={variants}>
-          <h3 className="text-purple-700 font-bold text-lg mb-4 md:scale-100 scale-125">Get in Touch</h3>
+          <h3 className=" font-bold text-lg mb-4 md:scale-100 scale-125">Get in Touch</h3>
           <div className="text-md mb-2 font-medium ">
             <p className="mb-1">123 Harmony Lane, Mumbai, India</p>
             <p>
@@ -65,7 +65,7 @@ const Footer = () => {
 
         {/* Social Media */}
         <motion.div initial="hidden" animate="visible" custom="bottom" variants={variants}>
-          <h3 className="text-purple-700 font-bold text-lg mb-4 md:scale-100 scale-125">Follow Us</h3>
+          <h3 className=" font-bold text-lg mb-4 md:scale-100 scale-125">Follow Us</h3>
           <div className="flex justify-center md:justify-start space-x-3">
             <MediaIcons icon={<LinkedIn />} href="https://www.linkedin.com" />
             <MediaIcons icon={<Facebook />} href="https://www.facebook.com" />
@@ -76,7 +76,7 @@ const Footer = () => {
 
         {/* Newsletter */}
         <motion.div initial="hidden" animate="visible" custom="right" variants={variants}>
-          <h3 className="text-purple-700 font-bold text-lg mb-4 md:scale-100 scale-125">Stay in the Loop</h3>
+          <h3 className=" font-bold text-lg mb-4 md:scale-100 scale-125">Stay in the Loop</h3>
           <p className="text-sm mb-4 font-medium">
             Subscribe for artist highlights, event tips & updates.
           </p>
@@ -96,7 +96,7 @@ const Footer = () => {
       </div>
 
       {/* Copyright */}
-      <div className="border-t border-purple-200 py-4 bg-purple-100 text-center text-sm text-purple-700">
+      <div className="border-t border-purple-200 py-4  text-center text-sm copyright">
         &copy; {new Date().getFullYear()} Artistly. All rights reserved.
       </div>
     </footer>

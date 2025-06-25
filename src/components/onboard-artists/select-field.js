@@ -22,14 +22,18 @@ const SelectField = ({
         </label>
       )}
 
-      <select
-        {...(hasRegister ? register(name) : {})}
-        name={!hasRegister ? name : undefined}
-        onChange={onChange}
-        {...(value !== undefined ? { value } : { defaultValue: "" })}
-        className={`w-full border border-purple-400 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-purple-500 ${className}`}
-      >
-        <option value="">{placeholder}</option>
+     <select
+      {...(hasRegister ? register(name) : {})}
+      name={!hasRegister ? name : undefined}
+      onChange={onChange}
+      {...(value !== undefined ? { value } : { defaultValue: "" })}
+      className={`w-full border border-purple-400 px-4 py-2 rounded 
+        bg-white dark:bg-gray-800 
+        text-gray-800 dark:text-white
+        focus:outline-none focus:ring-2 focus:ring-purple-500 ${className}`}
+    >
+
+        <option value="" >{placeholder}</option>
         {options.map((opt) => (
           <option key={opt} value={opt}>
             {opt}

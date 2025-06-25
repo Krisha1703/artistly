@@ -12,7 +12,6 @@ const ArtistCategoriesSection = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(4);
 
-  // Handle responsive itemsPerPage
   useEffect(() => {
     const updateItems = () => {
       if (window.innerWidth < 768) {

@@ -82,7 +82,7 @@ const ManagerDashboard = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50">
+    <div className="flex flex-col md:flex-row min-h-screen nav-menu-item">
       {/* Toggle Button on Mobile */}
       <div className="md:hidden flex justify-between items-center px-4 py-2 bg-purple-700 text-white">
         <h2 className="text-lg font-bold">Manager Dashboard</h2>

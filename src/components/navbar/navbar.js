@@ -5,17 +5,22 @@ import { motion } from "framer-motion";
 import NavMenu from "./nav-menu";
 import Link from "next/link";
 import Heading from "../heading";
+import { useTheme } from "../simple-context";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+  
 
   const toggleMenu = useCallback(() => {
     setMenuOpen((prev) => !prev);
   }, []);
 
   return (
-    <header className="relative flex items-center justify-between w-full md:p-4 p-6 bg-white z-20">
+    <header className="navbar relative flex items-center justify-between w-full md:p-4 p-6 z-20">
       <motion.div whileHover={{ scale: 1.05 }} className="cursor-pointer">
         <Link href="/" aria-label="Artistly Home" >
             <Heading
@@ -31,7 +36,7 @@ const Navbar = () => {
       </div>
 
       <nav
-        className={`fixed top-0 right-0 h-full md:w-1/3 w-1/2 bg-white shadow-lg transition-transform transform ${
+        className={`fixed top-0 right-0 h-full md:w-1/2 w-1/2  shadow-lg transition-transform transform ${
           menuOpen ? "translate-x-0" : "translate-x-full"
         } lg:translate-x-0 lg:static lg:shadow-none lg:flex lg:items-center lg:justify-between z-30`}
       >
@@ -56,10 +61,17 @@ const Navbar = () => {
           ></div>
         </div>
 
-        <ul className="text-purple-400 text-xl md:text-lg flex flex-col lg:flex-row list-none space-y-4 mt-20 md:mt-0 lg:space-y-0 lg:space-x-8 lg:-ml-10  lg:p-0 lg:justify-between items-center">
+        <ul className=" text-xl md:text-lg flex flex-col lg:flex-row list-none space-y-4 mt-20 md:mt-0 lg:space-y-0 lg:space-x-8 lg:-ml-10  lg:p-0 lg:justify-between items-center">
           <NavMenu Menu="Explore Artists" Route="/artists" />
           <NavMenu Menu="Onboard Artist" Route="/onboard" />
           <NavMenu Menu="Dashboard" Route="/dashboard" />
+           <button
+              onClick={toggleTheme}
+              className="flex items-center gap-2 theme-toggle px-3 py-1 rounded"
+            >
+              {theme === "light" ? <DarkModeIcon /> : <LightModeIcon />}
+              {theme === "light" ? "Dark Mode" : "Light Mode"}
+            </button>
         </ul>
       </nav>
 

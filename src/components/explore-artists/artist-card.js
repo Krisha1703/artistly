@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 const Tilt = dynamic(() => import("react-parallax-tilt"), { ssr: false });
 
 const ArtistCard = ({ artist }) => {
-  const isIndividual = !!artist.location; // true if individual artist data
+  const isIndividual = !!artist.location;
 
   return (
     <Tilt
@@ -18,12 +18,14 @@ const ArtistCard = ({ artist }) => {
     >
       {/* Image */}
       <div className="relative w-full h-64">
-        <Image
+       <Image
           src={artist.image || artist.src || ""}
           alt={artist.name}
           fill
+          sizes="(max-width: 640px) 100vw, 25vw"
           className="object-cover transition-transform duration-500 group-hover:scale-110"
         />
+
       </div>
 
       {/* Info */}
