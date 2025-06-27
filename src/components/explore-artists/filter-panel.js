@@ -12,8 +12,6 @@ const FilterPanel = ({
   setSelectedAvailability,
   minRating,
   setMinRating,
-  minReviews,
-  setMinReviews,
   maxFee,
   setMaxFee,
   isMobile,
@@ -21,6 +19,7 @@ const FilterPanel = ({
   setSelectedCategory,
   onClose,
 }) => {
+
   return (
     <div
       className={`
@@ -76,7 +75,7 @@ const FilterPanel = ({
         label="Max Fee ($)"
         value={maxFee ? `$${maxFee}` : ""}
         onChange={(e) => setMaxFee(e.target.value.replace(/[^\d]/g, ""))}
-        options={["$50", "$100", "$200", "$300", "$500", "$1000", "$1500"]}
+        options={["$100", "$200", "$500", "$1000", "$2000", "$5000", "$5000+"]}
         placeholder="Any"
       />
 
@@ -84,18 +83,9 @@ const FilterPanel = ({
       <SelectField
         name="minRating"
         label="Min Rating"
-        options={[4.5, 4, 3.5].map((r) => `${r}`)} 
+        options={[4.5, 4, 3.5, 3, 2.5, 2, 1.5, 1].map((r) => `${r}`)} 
         value={minRating}
         onChange={(e) => setMinRating(e.target.value)}
-        placeholder="Any"
-      />
-
-      <SelectField
-        name="minReviews"
-        label="Min Reviews"
-        value={minReviews}
-        onChange={(e) => setMinReviews(e.target.value)} 
-        options={[ "10","25", "50", "75", "100"]}
         placeholder="Any"
       />
 

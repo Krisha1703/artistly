@@ -178,3 +178,11 @@ input, textarea {
   @apply  text-purple-500;
 }
 
+
+.modal {
+  @apply bg-white text-purple-600;
+}
+
+.dark .modal {
+  @apply bg-gray-900 text-white;
+}
