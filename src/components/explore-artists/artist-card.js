@@ -22,8 +22,8 @@ const ArtistCard = ({ artist }) => {
         {/* Image */}
         <div className="relative w-full h-64">
           <Image
-            src={artist.profilePic}
-            alt={artist.name}
+            src={artist.profilePic || "/acrobat.jpg"}
+            alt={artist.name || "alternative name"}
             fill
             sizes="(max-width: 640px) 100vw, 25vw"
             className="object-cover transition-transform duration-500 group-hover:scale-110"

@@ -4,11 +4,10 @@ import { useState, useEffect } from "react";
 import ArtistCard from "@/components/explore-artists/artist-card";
 import FilterPanel from "@/components/explore-artists/filter-panel";
 import Heading from "@/components/heading";
-import { getAllArtists } from "../../../actions/fetch-artist";
+import { useFetchArtists } from "../../../hooks/use-fetch-artist";
 
 const ExploreArtists = () => {
-  const [allArtists, setAllArtists] = useState([]);
-  const [filteredArtists, setFilteredArtists] = useState([]);
+  const { allArtists, filteredArtists, setFilteredArtists } = useFetchArtists();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("");
@@ -18,21 +17,7 @@ const ExploreArtists = () => {
   const [minReviews, setMinReviews] = useState("");
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
-  useEffect(() => {
-    const fetchArtists = async () => {
-      const response = await getAllArtists();
-      console.log("📦 Artist Response:", response);
-
-      if (response.success) {
-        setAllArtists(response.artists);
-        setFilteredArtists(response.artists);
-      } else {
-        console.error("Error fetching artists:", response.error);
-      }
-    };
-
-    fetchArtists();
-  }, []);
+  
 
   // 🔍 Filtering with debug logs
   useEffect(() => {

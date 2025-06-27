@@ -32,6 +32,8 @@ enum Category {
   Speaker
   Magician
   Comedian
+  Acrobat
+  Instrumentalist
 }
 
 enum Language {

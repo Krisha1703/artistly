@@ -2,7 +2,7 @@
 
 import * as Yup from "yup";
 
-export const categories = ["DJ", "Singer", "Dancer", "Speaker", "Magician", "Comedian"];
+export const categories = ["DJ", "Singer", "Dancer", "Speaker", "Magician", "Comedian", "Acrobat", "Instrumentalist"];
 export const languages = [
   "English", "Hindi", "Tamil", "Malayalam", "Thai", "Spanish",
   "French", "German", "Japanese", "Gujarati", "Punjabi", "Bengali",

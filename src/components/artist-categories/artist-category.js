@@ -3,12 +3,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ArtistData } from "@/data/artists";
 import SlideArrow from "./slide-arrow";
 import Heading from "../heading";
 import ArtistCard from "../explore-artists/artist-card";
+import { useFetchArtists } from "../../../hooks/use-fetch-artist";
 
 const ArtistCategoriesSection = () => {
+   const { allArtists } = useFetchArtists();
   const [startIndex, setStartIndex] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(4);
 
@@ -27,7 +28,7 @@ const ArtistCategoriesSection = () => {
   }, []);
 
   const handleNext = () => {
-    if (startIndex + itemsPerPage < ArtistData.length) {
+    if (startIndex + itemsPerPage < allArtists.length) {
       setStartIndex(startIndex + itemsPerPage);
     }
   };
@@ -50,13 +51,13 @@ const ArtistCategoriesSection = () => {
 
         <div className="relative my-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {ArtistData.slice(startIndex, startIndex + itemsPerPage).map((artist, index) => (
+            {allArtists.slice(startIndex, startIndex + itemsPerPage).map((artist, index) => (
               <ArtistCard key={index} artist={artist} />
             ))}
           </div>
 
           {startIndex > 0 && <SlideArrow direction="left" onClick={handlePrev} />}
-          {startIndex + itemsPerPage < ArtistData.length && (
+          {startIndex + itemsPerPage < allArtists.length && (
             <SlideArrow direction="right" onClick={handleNext} />
           )}
         </div>
