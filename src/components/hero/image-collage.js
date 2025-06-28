@@ -3,9 +3,10 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
-import { ArtistData } from "@/data/artists";
+import { useFetchArtists } from "../../../hooks/use-fetch-artist";
 
 const ImageCollage = () => {
+   const { allArtists } = useFetchArtists();
  // Tracks the user's vertical scroll progress
   const collageRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -17,6 +18,11 @@ const ImageCollage = () => {
   const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]); // scales the entire image collage slightly as user scrolls vertically
   const rotate = useTransform(scrollYProgress, [0, 1], ["-3deg", "0deg"]); // rotates the entire image collage slightly as user scrolls vertically
  
+  // Selects the most popular artists based on rating to display in hero section
+   const topArtists = [...allArtists]
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 9);
+
   return (
     <div className="md:w-1/2 mb-8 md:mb-0 flex flex-col items-center">
         <motion.div
@@ -24,7 +30,7 @@ const ImageCollage = () => {
           style={{ scale, rotate }}
           className="grid grid-cols-3 gap-4"
         >
-          {ArtistData.map((img, i) => (
+          {topArtists.map((img, i) => (
             // Interactive motion effects applied to each image in the collage
             <motion.div
               key={i}
@@ -37,7 +43,7 @@ const ImageCollage = () => {
               className="rounded-lg shadow-lg overflow-hidden cursor-pointer"
             >
               <Image
-                src={img.image}
+                src={img.profilePic}
                 alt={img.alt}
                 width={350}
                 height={250}
