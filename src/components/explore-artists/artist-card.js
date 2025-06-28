@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
-import ArtistDetailsModal from "./artist-details-modal"; // import modal component
+import ArtistDetailsModal from "./artist-details-modal"; 
 
 const Tilt = dynamic(() => import("react-parallax-tilt"), { ssr: false });
 
@@ -26,6 +26,7 @@ const ArtistCard = ({ artist }) => {
             alt={artist.name || "alternative name"}
             fill
             sizes="(max-width: 640px) 100vw, 25vw"
+            aria-label="Popular Artists"
             className="object-cover transition-transform duration-500 group-hover:scale-110"
           />
         </div>
