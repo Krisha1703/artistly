@@ -24,7 +24,12 @@ Originally scoped as a frontend-only test, it now includes a real backend with *
 
 ---
 
-![Project Video Demo](/public/screenshots/video_demo.mp4)
+## 🎥 Project Video Demo
+
+[![Watch the demo video](https://img.youtube.com/vi/gKN4PvytSzQ/0.jpg)](https://youtu.be/gKN4PvytSzQ)
+
+👉 [Click here to watch the full video on YouTube](https://youtu.be/gKN4PvytSzQ)
+
 
 ---
 
