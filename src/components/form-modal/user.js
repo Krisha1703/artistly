@@ -10,7 +10,7 @@ const User = ({ onClose, onLogout, onGoToDashboard, firstname, lastname, email }
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
         transition={{ duration: 0.3 }}
-        className="bg-white rounded-md shadow-lg p-6 w-80 flex flex-col items-center"
+        className="modal rounded-md shadow-lg p-6 w-80 flex flex-col items-center"
       >
         <button className="absolute top-2 right-2 text-gray-500" onClick={onClose}>&times;</button>
         <h2 className="text-xl font-semibold text-primary ">{firstname} {lastname}</h2>

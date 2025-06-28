@@ -126,7 +126,7 @@ const Navbar = () => {
             {firstName ? (
               <div className="flex items-center gap-2">
                 <div
-                  className="nav-menu-item rounded-full w-10 h-10 flex items-center justify-center text-lg font-bold"
+                  className="user rounded-full w-10 h-10 flex items-center justify-center text-lg font-bold"
                 >
                   {getInitials(firstName, lastName)}
                 </div>

@@ -186,3 +186,12 @@ input, textarea {
 .dark .modal {
   @apply bg-gray-900 text-white;
 }
+
+.dark .user {
+  @apply bg-white text-purple-600 
+}
+
+ .user {
+  @apply bg-purple-600 text-white 
+}
+

@@ -28,7 +28,7 @@ export const useFetchArtists = () => {
     };
 
     fetchArtists();
-  }, [isMounted]);
+  }, [isMounted,setAllArtists, setFilteredArtists]);
 
   return {
     allArtists: isMounted ? allArtists : [], 
