@@ -1,8 +1,8 @@
-# 🎭 Artistly.com – Performing Artist Booking Platform (Frontend Demo)
+# 🎭 Artistly.com – Performing Artist Booking Platform
 
-✨ **Artistly.com** is a functional, mobile-responsive **frontend-only demo** of a fictional platform that connects **Event Planners** with **Artist Managers**.
+✨ **Artistly.com** is a functional, mobile-responsive **full-stack demo** of a fictional platform that connects **Event Planners** with **Artist Managers**.
 
-This 3–4 page application is designed as part of a frontend engineering assignment, built using **Next.js**, **Tailwind CSS**, and **Framer Motion**.
+Originally scoped as a frontend-only test, it now includes a real backend with **Next.js server components**, **Prisma**, and **MongoDB** for user authentication and artist submissions.
 
 ---
 
@@ -11,111 +11,137 @@ This 3–4 page application is designed as part of a frontend engineering assign
 * **Event Planners** can:
 
   * Browse artist categories and profiles.
-  * Filter artists by fee, location, rating, and availability.
-  * Request quotes (demo action only).
+  * Filter artists by fee, location, and category.
+  * Request quotes (demo action).
 
 * **Artist Managers** can:
 
-  * Onboard new artists.
-  * View artist submissions and booking leads.
-  * Analyze activity via dashboard charts (mock data only).
+  * Onboard new artists via a multi-step, validated form.
+  * Store artist data in a MongoDB database.
+  * View artist submissions and manage leads through a simple dashboard.
 
-⚠️ **Note:** No real backend or database is used. All data is fetched from static `.js` mock files or JSON-like arrays. The project focuses solely on frontend quality.
+🔒 **Note:** Some data, like testimonials and analytics, still use static JSON/mock files.
 
 ---
 
-## 📸 Screenshots
-
-### 🎤 Hero Section
-![Hero Section](/public/screenshots/hero-section.png)
-
-### 🎭 Artist Categories
-![Artist Categories](/public/screenshots/artist-categories.png)
-
-### 🔍 Explore Artists
-![Explore Artists](/public/screenshots/explore-artists.png)
-
-### 📝 Onboarding Artist
-![Onboarding Artist](/public/screenshots/onboarding-artists.png)
-
-### 📊 Manager Dashboard
-![Manager Dashboard](/public/screenshots/manager-dashboard.png)
+![Project Video Demo](/public/screenshots/Project_Video_Demo.mp4)
 
 ---
 
 ## 🚀 Tech Stack
 
-* **Next.js 14** – App Router & File-based routing
-* **Tailwind CSS** – Responsive and utility-first styling
-* **Framer Motion** – Page and component animations
-* **React Hook Form** – Form management & validation
-* **Chart.js + react-chartjs-2** – Visual analytics (pie, doughnut, line)
-* **MUI Icons** – Built-in icon support
+* **Next.js 15 (App Router)** — modern app router and react server components
+* **React functional components & hooks** — `useState`, `useEffect`, `useContext` for state management and side effects
+* **Prisma ORM** — for database operations with MongoDB
+* **React Hook Form + Yup** — for robust form handling and validation
+* **Tailwind CSS** — utility-first styling for responsive UI
+* **Framer Motion** — page & component animations
+* **Zustand** — simple state management
+* **MUI Icons** — icon library support
+* **Suspense** — with custom `Loading` fallback for streaming routes
 
 ---
 
-## 📂 Project Structure
-
-Here’s a breakdown of key folders:
+## 📂 Project Structure Highlights
 
 ```bash
-app/
-├── page.js                     # Home page
-├── artists/                   # Explore Artists page
-├── onboard/                   # Onboard Artist form
-├── dashboard/                 # Manager Dashboard (tabs: submissions, profiles, analytics)
+📦 artistly/
+├── Actions/               # Server actions (login, register, fetch, onboard artist)
+│   ├── fetch-artist.js
+│   ├── login.js
+│   ├── register.js
+│   ├── onboard-artist.js
+│
+├── Context/               # Global React Context
+│   ├── theme-context.js   # Theme toggling (light/dark)
+│
+├── Hooks/                 # Custom hooks
+│   ├── use-fetch-artist.js # useEffect + useState logic
+│
+├── Lib/                   # Integrations & Prisma client
+│   ├── cloudinary.js
+│   ├── cloudinary-upload.js
+│   ├── prisma/
+│   │   ├── schema.prisma
+│   │   ├── db.js
+│
+├── Schemas/               # Yup validation schemas
+│   ├── login-schema.js
+│   ├── register-schema.js
+│   ├── onboarding-schema.js
+│
+├── Utils/                 # Shared helper functions
+│   ├── getUserByEmail.js
+│
+├── Public/                # Static assets & images
+│   ├── images/
+│   ├── screenshots/
+│
+├── src/app/               # Next.js App Router structure
+│   ├── page.js            # Homepage
+│   ├── loading.js         # Suspense fallback
+│   ├── artists/page.js    # Artist listing page
+│   ├── onboard/page.js    # Onboard artist form
+│   ├── dashboard/page.js  # Manager dashboard
+│   ├── state/store.js     # Zustand store
+│   ├── globals.css        # Tailwind base styles
+│
+├── components/            # Reusable UI components
+│   ├── navbar/            # Navigation bar
+│   ├── hero/              # Hero section
+│   ├── explore-artists/   # ArtistCard, FilterPanel
+│   ├── onboard-artists/   # Onboarding form sections
+│   ├── dashboard/         # Dashboard table & charts
+│   ├── testimonials/      # Testimonials section
+│   ├── footer/            # Footer with motion
+│
+├── data/                  # Mock/static data
+│   ├── artists.js
+│   ├── dashboard.js
+│   ├── testimonials.js
+│
+├── .env                   # Environment variables (DB, Cloudinary)
+├── package.json
+├── next.config.js
+└── README.md
 
-components/
-├── explore-artists/          # ArtistCard, FilterPanel
-├── dashboard/                # SidePanel, Table, Charts
-├── onboard-artist/           # Artist onboaring form
-├── button/                   # DefaultButton, HoverButton
-├── heading.js                # Section heading component
-├── navbar/                   # Navbar with motion effects
-├── footer/                   # Footer with motion effects
-├── testimonials/             # Client testimonials section
-├── hero/                     # Hero section of home page
-
-data/
-├── artists.js                # Mock data for artists
-├── steps.js                  # "How it works" steps
-├── dashboard.js              # Mock data for manager dashboard
-├── testimonials.js           # Mock data for client testimonials
-├── onboarding.js             # Mock data for onboarding artists
 ```
 
 ---
 
 ## 📱 Pages & Features
 
-### 1. **Homepage**
+✅ **Homepage:**
+![Hero Section](/public/screenshots/hero_section.png)
+Hero section, category cards, and smooth Framer Motion animations.
 
-* Animated intro with hero section.
-* How-it-works guide (with scroll-based animation).
-* Carousel of popular artist categories.
+✅ **Explore Artists:**
+![Explore Artists](/public/screenshots/explore-artists.png)
+Artist cards grid with responsive filter panel. Data fetched from MongoDB via custom `useFetchArtists` hook that uses `useEffect` for side effects.
 
-### 2. **Explore Artists**
+✅ **Onboard Artist:**
+![Onboarding Artist](/public/screenshots/onboarding-artists.png)
+Multi-section form with file upload and dropdowns. Yup schemas + React Hook Form for real-time validation.
 
-* Filter by category, location, rating, fee, availability.
-* Artist cards with ratings and fees.
-* Search by name.
+✅ **Manager Dashboard:**
+Displays artist submissions stored in the database. Static data used for testimonials and charts.
+![Manager Dashboard](/public/screenshots/manager-dashboard.png)
 
-### 3. **Onboard Artist**
+✅ **Suspense & Performance:**
+Root layout wraps pages in `<Suspense>` with a custom `<Loading />` component to handle server component streaming.
 
-* Dynamic form validation using react-hook-form and conditional error messages.
-* Category, Availability, and Fee fields with dropdowns (<select>) and customized styling.
-* Image preview before upload (if implemented).
-* Bio and Description inputs to allow artists to add personal branding.
-* Rating and Review Count input (to simulate popularity).
+✅ **Dark Mode & Theme Context:**
+Theme toggling implemented globally via React Context.
 
-### 4. **Manager Dashboard**
+---
 
-* Tab-based navigation for:
+## 🌐 SEO & Accessibility
 
-  * Submissions
-  * Booking Requests
-  * Artist Profiles
-  * Analytics & Reports (Chart.js)
+* Next.js <Image /> component: Optimized image loading with priority and loading="lazy" where appropriate.
+* Alt text for all images: Images include descriptive alt tags.
+* Accessible form fields: Inputs include aria-labels and linked <label> tags.
+* Semantic HTML: Proper use of <main>, <header>, <section>, <nav>, and <footer> for better readability and screen reader support.
+* Dynamic Imports with next/dynamic: Heavy or client-only components — like charts, dashboard widgets, or large UI blocks — are loaded dynamically using next/dynamic for code splitting.
 
 ---
 
@@ -123,39 +149,34 @@ data/
 
 1. **Clone the repo:**
 
-```bash
-git clone https://github.com/Krisha1703/artistly.git
-cd artistly
-```
-
+   ```bash
+   git clone https://github.com/Krisha1703/artistly.git
+   cd artistly
+   ```
 2. **Install dependencies:**
 
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
+3. **Generate Prisma Client:**
 
-3. **Start the dev server:**
+   ```bash
+   npx prisma generate
+   ```
+4. **Start the dev server:**
 
-```bash
-npm run dev
-```
+   ```bash
+   npm run dev
+   ```
 
-4. Open `http://localhost:3000` to view the app.
-
----
-
-## 🌐 SEO & Performance
-
-* Optimized `<Image />` with `loading="lazy"` where applicable.
-* Accessible elements with `aria-labels` where applicable.
-* Meta descriptions per page (`metadata` in `layout.js`).
-* Suspense loading UI with custom animated loader.
+   Open `http://localhost:3000` to view the app.
 
 ---
 
 ## 📦 Deployment
 
-Deployed Vercel Link: https://krisha-artistly-app.vercel.app
+Deployed on **Vercel**:
+[krisha-artistly-app.vercel.app](https://krisha-artistly-app.vercel.app)
 
-
+---
 
