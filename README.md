@@ -24,7 +24,7 @@ Originally scoped as a frontend-only test, it now includes a real backend with *
 
 ---
 
-![Project Video Demo](/public/screenshots/Project_Video-Demo.mp4)
+![Project Video Demo](/public/screenshots/video_demo.mp4)
 
 ---
 
