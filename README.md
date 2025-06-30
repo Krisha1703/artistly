@@ -2,7 +2,7 @@
 
 ✨ **Artistly.com** is a functional, mobile-responsive **full-stack demo** of a fictional platform that connects **Event Planners** with **Artist Managers**.
 
-Originally scoped as a frontend-only test, it now includes a real backend with **Next.js server components**, **Prisma**, and **MongoDB** for user authentication and artist submissions.
+Originally scoped as a frontend-only test, it now includes a real backend with **Next.js server components**, **Prisma**, and **MongoDB** for user authentication and artist submissions. It also uses **TensorFlow.js** with **COCO-SSD** to ensure profile images are appropriate.
 
 ---
 
@@ -21,6 +21,28 @@ Originally scoped as a frontend-only test, it now includes a real backend with *
   * View artist submissions and manage leads through a simple dashboard.
 
 🔒 **Note:** Some data, like testimonials and analytics, still use static JSON/mock files.
+
+---
+
+## 📸 **Profile Image Appropriateness Check**
+
+Artistly uses **TensorFlow.js** with the **COCO-SSD** model to detect people and possible text-like objects in profile images.  
+If the image:
+- ✔️ **Contains at least one person**
+- ❌ **Contains no text-like elements**
+
+…it will be approved!
+
+Examples:
+
+✅ **Approved:**
+
+![Profile Aapproved](/public/screenshots/profile-image-approved.png)
+
+❌ **Unapproved Examples:**
+
+![Profile Unapproved 1](/public/screenshots/profile-image-unapproved.png)
+![Profile Unapproved 2](/public/screenshots/profile-image-unapproved1.png)
 
 ---
 
@@ -44,6 +66,7 @@ Originally scoped as a frontend-only test, it now includes a real backend with *
 * **Zustand** — simple state management
 * **MUI Icons** — icon library support
 * **Suspense** — with custom `Loading` fallback for streaming routes
+- **TensorFlow.js + COCO-SSD** — smart profile image validation (person detected, no text)
 
 ---
 
@@ -147,6 +170,15 @@ Theme toggling implemented globally via React Context.
 * Accessible form fields: Inputs include aria-labels and linked <label> tags.
 * Semantic HTML: Proper use of <main>, <header>, <section>, <nav>, and <footer> for better readability and screen reader support.
 * Dynamic Imports with next/dynamic: Heavy or client-only components — like charts, dashboard widgets, or large UI blocks — are loaded dynamically using next/dynamic for code splitting.
+
+---
+
+## 🧪 Test Manager Account
+
+To test the manager dashboard:
+
+Email: artistly@manager.com
+Password: test123
 
 ---
 

@@ -44,7 +44,7 @@ const ImageCollage = () => {
             >
               <Image
                 src={img.profilePic}
-                alt={img.alt}
+                alt={img.name}
                 width={350}
                 height={250}
                 className="object-cover w-full h-full"

@@ -4,7 +4,8 @@
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { loadCocoSsdModel, detectObjects } from "../../../lib/vision-check";
 import {
   categories,
   languages,
@@ -25,6 +26,13 @@ export default function ArtistOnboardingForm() {
   const [submitError, setSubmitError] = useState("");
   const [submitSuccess, setSubmitSuccess] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const [error, setError] = useState("");
+
+ const imageRef = useRef(null);
+
+  useEffect(() => {
+    loadCocoSsdModel();
+  }, []);
 
   const {
     register,
@@ -72,13 +80,38 @@ export default function ArtistOnboardingForm() {
     }
   };
 
-  const handleImageChange = (e) => {
+
+  const handleImageChange = async (e) => {
     const file = e.target.files?.[0];
-    if (file) {
-      setSelectedFile(file);
-      setImagePreview(URL.createObjectURL(file));
-      setValue("profileImage", file);
-    }
+    if (!file) return;
+
+    setSelectedFile(file);
+    const url = URL.createObjectURL(file);
+    setImagePreview(url);
+    setValue("profileImage", file);
+    setError("");
+
+    // Wait for image to load so detection works
+    const img = new Image();
+    img.src = url;
+    img.crossOrigin = "anonymous";
+    img.onload = async () => {
+      imageRef.current = img;
+
+      const predictions = await detectObjects(img);
+      const hasPerson = predictions.some((p) => p.class === "person");
+      const hasText = predictions.some((p) => p.class === "text");
+
+      console.log("Predictions:", predictions);
+
+      if (hasPerson && !hasText) {
+        setError(""); 
+      } else {
+        setError(
+          "This image is not appropriate for a profile picture. It must contain a person and no text."
+        );
+      }
+    };
   };
 
   return (
@@ -172,10 +205,10 @@ export default function ArtistOnboardingForm() {
         required
       />
 
-      <ImageUpload
+     <ImageUpload
         handleImageChange={handleImageChange}
         imagePreview={imagePreview}
-        register={register}
+        error={error}
       />
 
       <div className="pt-4 text-center">
