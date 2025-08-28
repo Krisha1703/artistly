@@ -1,11 +1,17 @@
 // Footer Component
 
-import FooterMenus from "./footer-menus";
 import { motion } from "framer-motion";
-import MediaIcons from "./media-icons";
-import { memo } from "react";
-import { Facebook, Instagram, LinkedIn, X } from "@mui/icons-material";
-import DefaultButton from "../button/default-button";
+import React, { memo } from "react";
+
+import dynamic from "next/dynamic";
+const FooterMenus = dynamic(() => import("./footer-menus"), { ssr: false });
+const MediaIcons = dynamic(() => import("./media-icons"), { ssr: false });
+const DefaultButton = dynamic(() => import("../button/default-button"), { ssr: false });
+
+const Facebook = dynamic(() => import("@mui/icons-material/Facebook"), { ssr: false });
+const Instagram = dynamic(() => import("@mui/icons-material/Instagram"), { ssr: false });
+const LinkedIn = dynamic(() => import("@mui/icons-material/LinkedIn"), { ssr: false });
+const X = dynamic(() => import("@mui/icons-material/Twitter"), { ssr: false });
 
 const Footer = () => {
   const variants = {

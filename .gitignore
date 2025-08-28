@@ -41,3 +41,18 @@ yarn-error.log*
 next-env.d.ts
 
 /src/generated/prisma
+
+# Ignore virtual environment
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore build files
+*.db
+*.sqlite3
+
+# Ignore OS files
+Thumbs.db
+

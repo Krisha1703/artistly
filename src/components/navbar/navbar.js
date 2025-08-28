@@ -5,21 +5,28 @@ import { motion } from "framer-motion";
 import NavMenu from "./nav-menu";
 import Link from "next/link";
 import Heading from "../heading";
-import { useTheme } from "../../../context/theme-context";
-import LightModeIcon from "@mui/icons-material/LightMode";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import Login from '../form-modal/login';
-import SignUp from '../form-modal/signup';
 import useUserStore from '@/app/state/store';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import User from '../form-modal/user';
 import { useRouter } from 'next/navigation';
+import ThemeToggleButton from "./theme-toggle-button";
+import BetaFeatureButton from "./beta-feature-button";
+
+import dynamic from "next/dynamic";
+
+// Lazy load modals
+const Login = dynamic(() => import("../form-modal/login"), { ssr: false });
+const SignUp = dynamic(() => import("../form-modal/signup"), { ssr: false });
+const User = dynamic(() => import("../form-modal/user"), { ssr: false });
+
+// Lazy load icon
+const AccountCircleIcon = dynamic(
+  () => import("@mui/icons-material/AccountCircle"),
+  { ssr: false }
+);
 
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
-   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const router = useRouter();
@@ -71,9 +78,9 @@ const Navbar = () => {
       </div>
 
       <nav
-        className={`fixed top-0 right-0 h-full md:w-2/3 w-1/2  shadow-lg transition-transform transform ${
+        className={`fixed top-0 right-0 h-full md:w-full w-1/2  shadow-lg transition-transform transform ${
           menuOpen ? "translate-x-0" : "translate-x-full"
-        } lg:translate-x-0 lg:static lg:shadow-none lg:flex lg:items-center lg:justify-between z-30`}
+        } lg:translate-x-0 lg:static lg:shadow-none lg:flex lg:items-center lg:justify-end z-30`}
       >
         <div
           className="lg:hidden cursor-pointer ml-10 mt-10"
@@ -100,13 +107,8 @@ const Navbar = () => {
           <NavMenu Menu="Explore Artists" Route="/artists" />
           <NavMenu Menu="Onboard Artist" Route="/onboard" />
           <NavMenu Menu="Dashboard" Route="/dashboard" />
-           <button
-              onClick={toggleTheme}
-              className="flex items-center gap-2 theme-toggle px-3 py-1 rounded"
-            >
-              {theme === "light" ? <DarkModeIcon /> : <LightModeIcon />}
-              {theme === "light" ? "Dark Mode" : "Light Mode"}
-            </button>
+          <ThemeToggleButton />
+          <BetaFeatureButton />
 
             {/* User sign in button*/}
            <motion.li

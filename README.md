@@ -217,3 +217,10 @@ Deployed on **Vercel**:
 
 ---
 
+Issues to fix:
+
+6. need to improve the beta version. to start: cd api/event-classifier -> .\venv\Scripts\Activate -> uvicorn main:app --reload --port 8000
+
+7. too much loading time, need to improve speed and performance.
+
+9. create suspense and fallback states/page

@@ -18,7 +18,7 @@ import {
 import CheckboxGroup from "./checkbox-field";
 import ImageUpload from "./image-upload";
 import InputField from "./input-field";
-import SelectField from "./select-field";
+import SelectField from "./select-field-uncontrolled";
 import { onboardArtist } from "../../../actions/onboard-artist";
 
 export default function ArtistOnboardingForm() {

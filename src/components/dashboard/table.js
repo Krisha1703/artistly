@@ -1,5 +1,6 @@
-// Table Component for Manager Dashboard
+import { formatDateTime } from "../../../utils/date-formatter";
 
+// Table Component for Manager Dashboard
 const Table = ({ columns, data, actions }) => {
   return (
     <div className="overflow-x-auto rounded shadow">
@@ -11,13 +12,15 @@ const Table = ({ columns, data, actions }) => {
                 {col.title}
               </th>
             ))}
-            <th className="px-4 py-3 font-medium">Actions</th>
+            {actions && (
+              <th className="px-4 py-3 font-medium">Actions</th>
+            )}
           </tr>
         </thead>
         <tbody>
           {data.length === 0 ? (
             <tr>
-              <td colSpan={columns.length + 1} className="text-center py-6 text-gray-500">
+              <td colSpan={columns.length + (actions ? 1 : 0)} className="text-center py-6 text-gray-500">
                 No data found.
               </td>
             </tr>
@@ -26,10 +29,12 @@ const Table = ({ columns, data, actions }) => {
               <tr key={idx} className="odd:bg-white even:bg-gray-50 border-t">
                 {columns.map((col) => (
                   <td key={col.key} className="px-4 py-3">
-                    {row[col.key]}
+                    {col.key === "date" ? formatDateTime(row[col.key]) : row[col.key]}
                   </td>
                 ))}
-                <td className="px-4 py-3">{actions(row)}</td>
+                {actions && (
+                  <td className="px-4 py-3">{actions(row)}</td>
+                )}
               </tr>
             ))
           )}

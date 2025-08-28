@@ -1,10 +1,12 @@
 // Testimonial Section Component
 
-import testimonials from "@/data/testimonials";
+import React from "react";
+
 import dynamic from "next/dynamic";
-import Heading from "../heading";
+import testimonials from "@/data/testimonials";
 
 const TestimonialCard = dynamic(() => import("./testimonial-card"), { ssr: false });
+const Heading = dynamic(() => import("../heading"), { ssr: false });
 
 const TestimonialSection = () => {
   return (
@@ -66,4 +68,4 @@ const TestimonialSection = () => {
   );
 };
 
-export default TestimonialSection;
+export default React.memo(TestimonialSection);

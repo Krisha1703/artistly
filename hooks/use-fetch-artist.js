@@ -1,3 +1,5 @@
+// Custom hook for fetching artists
+
 "use client";
 
 import { useState, useEffect } from "react";

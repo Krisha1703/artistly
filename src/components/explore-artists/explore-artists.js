@@ -1,10 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import ArtistCard from "@/components/explore-artists/artist-card";
-import FilterPanel from "@/components/explore-artists/filter-panel";
-import Heading from "@/components/heading";
+import dynamic from "next/dynamic";
+import React, { useState, useEffect } from "react";
 import { useFetchArtists } from "../../../hooks/use-fetch-artist";
+
+const ArtistCard = dynamic(() => import("@/components/explore-artists/artist-card"), { ssr: false });
+const FilterPanel = dynamic(() => import("@/components/explore-artists/filter-panel"), { ssr: false });
+const Heading = dynamic(() => import("@/components/heading"), { ssr: false });
 
 const ExploreArtists = () => {
   const { allArtists, filteredArtists, setFilteredArtists } = useFetchArtists();
@@ -182,8 +184,8 @@ const ExploreArtists = () => {
             {filteredArtists.length === 0 && (
               <p className="col-span-full text-center text-purple-500">No matching artists found.</p>
             )}
-            {filteredArtists.map((artist) => (
-              <ArtistCard key={artist._id} artist={artist} />
+            {filteredArtists.map((artist, index) => (
+              <ArtistCard key={artist._id || index} artist={artist} />
             ))}
 
           </div>
@@ -193,4 +195,4 @@ const ExploreArtists = () => {
   );
 };
 
-export default ExploreArtists;
+export default React.memo(ExploreArtists);

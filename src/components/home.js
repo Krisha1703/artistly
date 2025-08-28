@@ -3,12 +3,14 @@
 "use client";
 
 import HeroSection from "./hero/hero";
-import HowItWorksSection from "./how-it-works/how-it-works";
 import ArtistCategory from "./artist-categories/artist-category";
-import TestimonialSection from "./testimonials/testimonial-section";
-import Footer from "./footer/footer";
 import Navbar from "./navbar/navbar";
+import HowItWorksSection from "./how-it-works/how-it-works";
 
+import dynamic from "next/dynamic";
+
+const TestimonialSection = dynamic(() => import("./testimonials/testimonial-section"), { ssr: false });
+const Footer = dynamic(() => import("./footer/footer"), { ssr: false });
 
 export default function HomePage() {
 

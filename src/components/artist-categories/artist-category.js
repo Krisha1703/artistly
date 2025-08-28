@@ -2,11 +2,16 @@
 
 "use client";
 
-import { useState, useEffect } from "react";
-import SlideArrow from "./slide-arrow";
-import Heading from "../heading";
-import ArtistCard from "../explore-artists/artist-card";
+import React, { useState, useEffect } from "react";
+
 import { useFetchArtists } from "../../../hooks/use-fetch-artist";
+
+import dynamic from "next/dynamic";
+
+// Lazy load heavy components
+const Heading = dynamic(() => import("../heading"), { ssr: false });
+const SlideArrow = dynamic(() => import("./slide-arrow"), { ssr: false });
+const ArtistCard = dynamic(() => import("../explore-artists/artist-card"), { ssr: false });
 
 const ArtistCategoriesSection = () => {
    const { allArtists } = useFetchArtists();
@@ -66,4 +71,4 @@ const ArtistCategoriesSection = () => {
   );
 };
 
-export default ArtistCategoriesSection;
+export default React.memo(ArtistCategoriesSection);

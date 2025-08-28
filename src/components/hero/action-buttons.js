@@ -1,10 +1,13 @@
 // Action Buttons for the Hero Section
 
 import { motion } from "framer-motion"
-import HoverButton from "../button/hover-button";
-import DefaultButton from "../button/default-button";
-import BrushIcon from "@mui/icons-material/Brush";
-import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
+
+import dynamic from "next/dynamic";
+
+const RecordVoiceOverIcon = dynamic(() => import("@mui/icons-material/RecordVoiceOver"), { ssr: false });
+const BrushIcon = dynamic(() => import("@mui/icons-material/Brush"), { ssr: false });
+const HoverButton = dynamic(() => import("../button/hover-button"), { ssr: false });
+const DefaultButton = dynamic(() => import("../button/default-button"), { ssr: false });
 
 const ActionButtons = () => {
   return (

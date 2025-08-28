@@ -14,7 +14,7 @@ const Heading = ({
       className={`${
         subheading
           ? "text-2xl md:justify-center mb-4"
-          : "text-4xl md:justify-start"
+          : "text-3xl md:justify-start"
       } heading-primary font-extrabold leading-tight flex items-center gap-3 justify-center`}
       initial={{ y: 30, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}

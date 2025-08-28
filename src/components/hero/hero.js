@@ -1,9 +1,14 @@
 // Hero Section with Artist Image Collage
 
 "use client";
-
-import ImageCollage from "./image-collage";
+import dynamic from "next/dynamic";
 import TextSection from "./text-section";
+
+const ImageCollage = dynamic(() => import('./image-collage'), {
+  ssr: false,
+  suspense: true,
+});
+
 
 export default function HeroSection() {
   return (

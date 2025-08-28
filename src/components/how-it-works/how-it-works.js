@@ -3,10 +3,14 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
-import CheckIcon from "@mui/icons-material/Check";
-import Heading from "../heading";
+import React, { useRef, useState, useEffect, useMemo } from "react";
 import { steps } from "@/data/steps"; 
+
+import dynamic from "next/dynamic";
+
+// Lazy load heavy components
+const Heading = dynamic(() => import("../heading"), { suspense: true });
+const CheckIcon = dynamic(() => import("@mui/icons-material/Check"), { suspense: true });
 
 const HowItWorks = () => {
   // Reference to the section for scroll tracking
@@ -18,17 +22,17 @@ const HowItWorks = () => {
 
   // Baed on scroll progress, scale the section and track current step
   const scale = useTransform(scrollYProgress, [0, 1], [0.9, 1]);
+  
+  const stepCount = useMemo(() => steps.length, []);
   const [currentStep, setCurrentStep] = useState(0);
 
   useEffect(() => {
-    const stepCount = steps.length;
     const unsubscribe = scrollYProgress.on("change", (v) => {
       const stepIndex = Math.min(Math.floor(v * (stepCount + 1)), stepCount);
       setCurrentStep(stepIndex);
     });
-
     return () => unsubscribe();
-  }, [scrollYProgress]);
+  }, [scrollYProgress, stepCount]);
 
   return (
     <section className="px-6 py-10 " ref={ref}>
@@ -78,4 +82,4 @@ const HowItWorks = () => {
   );
 };
 
-export default HowItWorks;
+export default React.memo(HowItWorks);

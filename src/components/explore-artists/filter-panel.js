@@ -1,6 +1,6 @@
 // Filter Panel Component For Exploring Artists
 
-import SelectField from "../onboard-artists/select-field";
+import SelectField from "../onboard-artists/select-field-controlled";
 
 const FilterPanel = ({
   categories,

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import ArtistDetailsModal from "./artist-details-modal"; 
@@ -25,6 +25,8 @@ const ArtistCard = ({ artist }) => {
             src={artist.profilePic || "/acrobat.jpg"}
             alt={artist.name || "alternative name"}
             fill
+            placeholder="blur"
+            blurDataURL="/404-artist.png"
             sizes="(max-width: 640px) 100vw, 25vw"
             aria-label="Popular Artists"
             className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -74,4 +76,4 @@ const ArtistCard = ({ artist }) => {
   );
 };
 
-export default ArtistCard;
+export default React.memo(ArtistCard);
