@@ -8,7 +8,7 @@ import Heading from "../heading";
 import useUserStore from '@/app/state/store';
 import { useRouter } from 'next/navigation';
 import ThemeToggleButton from "./theme-toggle-button";
-import BetaFeatureButton from "./beta-feature-button";
+
 
 import dynamic from "next/dynamic";
 
@@ -108,7 +108,6 @@ const Navbar = () => {
           <NavMenu Menu="Onboard Artist" Route="/onboard" />
           <NavMenu Menu="Dashboard" Route="/dashboard" />
           <ThemeToggleButton />
-          <BetaFeatureButton />
 
             {/* User sign in button*/}
            <motion.li
