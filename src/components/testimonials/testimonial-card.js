@@ -28,7 +28,7 @@ const TestimonialCard = ({ userImage, userName, review, rating }) => {
         {/* User profile image */}
         <div className="w-16 h-16 rounded-full overflow-hidden">
           <Image
-            src={userImage}
+            src={"/artist-profile-images/user.png"}
             alt={`${userName}'s profile`}
             width={64}
             height={64}
