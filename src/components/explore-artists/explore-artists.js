@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import React, { useState, useEffect } from "react";
 import { useFetchArtists } from "../../../hooks/use-fetch-artist";
+import { useSearchParams } from "next/navigation";
 
 const ArtistCard = dynamic(() => import("@/components/explore-artists/artist-card"), { ssr: false });
 const FilterPanel = dynamic(() => import("@/components/explore-artists/filter-panel"), { ssr: false });
@@ -10,29 +11,63 @@ const Heading = dynamic(() => import("@/components/heading"), { ssr: false });
 
 const ExploreArtists = () => {
   const { allArtists, filteredArtists, setFilteredArtists } = useFetchArtists();
+  const searchParams = useSearchParams();
+
+  // 🎯 STATE
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedAvailability, setSelectedAvailability] = useState("");
-  const [maxFee, setMaxFee] = useState("");
+  const [selectedFeeRange, setSelectedFeeRange] = useState("");
   const [minRating, setMinRating] = useState("");
   const [minReviews, setMinReviews] = useState("");
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
-  
-
-  // 🔍 Filtering with debug logs
+  // ==========================
+  // 🔗 APPLY URL PARAMS → STATE
+  // ==========================
   useEffect(() => {
-    console.log("🔄 Filters Applied:");
-    console.log("Search Term:", searchTerm);
-    console.log("Selected Category:", selectedCategory);
-    console.log("Selected Location:", selectedLocation);
-    console.log("Selected Availability:", selectedAvailability);
-    console.log("Max Fee:", maxFee);
-    console.log("Min Rating:", minRating);
+    const category = searchParams.get("category");
+    const location = searchParams.get("location");
+    const feeRange = searchParams.get("feeRange");
+    const rating = searchParams.get("rating");
+    const search = searchParams.get("search");
+    if (search) setSearchTerm(search);
 
+    if (category) setSelectedCategory(category);
+    if (location) setSelectedLocation(location);
+    if (feeRange) setSelectedFeeRange(feeRange);
+    if (rating) setMinRating(rating);
+
+  }, [searchParams]);
+
+
+  // ==========================
+  // 💰 PARSE FEE
+  // ==========================
+  const parseFeeRange = (feeRange) => {
+    if (!feeRange) return { min: 0, max: 0 };
+
+    const match = feeRange.match(/\$?(\d+(?:,\d+)?)\s*-\s*\$?(\d+(?:,\d+)?)/);
+
+    if (match) {
+      return {
+        min: parseInt(match[1].replace(/,/g, "")),
+        max: parseInt(match[2].replace(/,/g, "")),
+      };
+    }
+
+    return { min: 0, max: 0 };
+  };
+
+  // ==========================
+  // 🔍 FILTER LOGIC
+  // ==========================
+  useEffect(() => {
     const filtered = allArtists.filter((artist) => {
-      const matchesSearch = artist.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSearch = artist.name
+        ?.toLowerCase()
+        .includes(searchTerm.toLowerCase());
 
       const matchesCategory = selectedCategory
         ? artist.category?.includes(selectedCategory)
@@ -46,28 +81,27 @@ const ExploreArtists = () => {
         ? artist.availability?.includes(selectedAvailability)
         : true;
 
-      const artistFeeMax = parseFeeRange(artist.feeRange);
-      const inputMaxFee = parseInt(maxFee || 0);
-      const matchesFee = maxFee ? artistFeeMax <= inputMaxFee : true;
-
-      const matchesRating = minRating
-        ? artist.rating >= parseFloat(minRating)
+      const matchesFeeRange = selectedFeeRange
+        ? artist.feeRange === selectedFeeRange
         : true;
 
-      const result = (
+      const matchesRating = minRating
+        ? artist.rating >= Number(minRating)
+        : true;
+
+      const matchesReviews = minReviews
+        ? artist.reviews >= Number(minReviews)
+        : true;
+
+      return (
         matchesSearch &&
         matchesCategory &&
         matchesLocation &&
         matchesAvailability &&
-        matchesFee &&
-        matchesRating
+        matchesFeeRange &&
+        matchesRating &&
+        matchesReviews
       );
-
-      if (result) {
-        console.log(`✅ Artist matched: ${artist.name}`);
-      }
-
-      return result;
     });
 
     setFilteredArtists(filtered);
@@ -77,24 +111,21 @@ const ExploreArtists = () => {
     selectedCategory,
     selectedLocation,
     selectedAvailability,
-    maxFee,
+    selectedFeeRange,
     minRating,
+    minReviews,
   ]);
 
-  const parseFeeRange = (feeRange) => {
-    if (!feeRange) return 0;
-    const match = feeRange.match(/\$?(\d+(?:,\d+)?)\s*-\s*\$?(\d+(?:,\d+)?)/);
-    if (match) {
-      const max = match[2].replace(/,/g, "");
-      return parseInt(max);
-    }
-    return 0;
-  };
-
-  const categories = [...new Set(allArtists.flatMap((a) => a.category))];
+  // ==========================
+  // 📊 OPTIONS
+  // ==========================
+  const categories = [...new Set(allArtists.flatMap((a) => a.category || []))];
   const locations = [...new Set(allArtists.map((a) => a.location))];
-  const availabilities = [...new Set(allArtists.flatMap((a) => a.availability))];
+  const availabilities = [...new Set(allArtists.flatMap((a) => a.availability || []))];
 
+  // ==========================
+  // UI
+  // ==========================
   return (
     <section className="px-6 py-10 max-w-7xl mx-auto">
       <Heading
@@ -104,6 +135,7 @@ const ExploreArtists = () => {
         subheading={true}
       />
 
+      {/* MOBILE FILTER BUTTON */}
       <div className="md:hidden flex justify-end mb-4">
         <button
           className="bg-purple-500 text-white px-4 py-2 rounded font-semibold"
@@ -114,20 +146,23 @@ const ExploreArtists = () => {
       </div>
 
       <div className="flex flex-col md:flex-row gap-6">
+        {/* BACKDROP */}
         {isMobileFilterOpen && (
           <div
             className="fixed inset-0 bg-black/50 z-40"
             onClick={() => setIsMobileFilterOpen(false)}
-            aria-hidden="true"
           />
         )}
 
+        {/* FILTER PANEL */}
         <aside
           className={`z-50 transition-transform duration-500
-            fixed top-0 left-0 w-3/4 h-auto p-0
-            md:static md:w-1/4 md:h-auto md:p-0 filter-panel
+            fixed top-0 left-0 w-3/4
+            md:static md:w-1/4
             transform ${
-              isMobileFilterOpen ? "translate-x-10 translate-y-20" : "-translate-x-full md:translate-x-0"
+              isMobileFilterOpen
+                ? "translate-x-10 translate-y-20"
+                : "-translate-x-full md:translate-x-0"
             }`}
         >
           <FilterPanel
@@ -135,42 +170,29 @@ const ExploreArtists = () => {
             locations={locations}
             availabilities={availabilities}
             selectedCategory={selectedCategory}
-            setSelectedCategory={(val) => {
-              console.log("🎯 Selected Category:", val);
-              setSelectedCategory(val);
-            }}
+            setSelectedCategory={setSelectedCategory}
             selectedLocation={selectedLocation}
-            setSelectedLocation={(val) => {
-              console.log("📍 Selected Location:", val);
-              setSelectedLocation(val);
-            }}
+            setSelectedLocation={setSelectedLocation}
             selectedAvailability={selectedAvailability}
-            setSelectedAvailability={(val) => {
-              console.log("🕒 Selected Availability:", val);
-              setSelectedAvailability(val);
-            }}
+            setSelectedAvailability={setSelectedAvailability}
             minReviews={minReviews}
             setMinReviews={setMinReviews}
             minRating={minRating}
-            setMinRating={(val) => {
-              console.log("⭐ Min Rating Selected:", val);
-              setMinRating(val);
-            }}
-            maxFee={maxFee}
-            setMaxFee={(val) => {
-              console.log("💰 Max Fee Selected:", val);
-              setMaxFee(val);
-            }}
+            setMinRating={setMinRating}
+            selectedFeeRange={selectedFeeRange}
+            setSelectedFeeRange={setSelectedFeeRange}
             isMobile={isMobileFilterOpen}
             onClose={() => setIsMobileFilterOpen(false)}
           />
         </aside>
 
+        {/* MAIN CONTENT */}
         <div className="flex-1">
           <div className="flex justify-between items-center mb-4">
             <h4 className="text-lg font-semibold text-purple-600">
               Found: {filteredArtists.length} artists
             </h4>
+
             <input
               type="text"
               placeholder="Search artists..."
@@ -182,12 +204,14 @@ const ExploreArtists = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredArtists.length === 0 && (
-              <p className="col-span-full text-center text-purple-500">No matching artists found.</p>
+              <p className="col-span-full text-center text-purple-500">
+                No matching artists found.
+              </p>
             )}
+
             {filteredArtists.map((artist, index) => (
               <ArtistCard key={artist._id || index} artist={artist} />
             ))}
-
           </div>
         </div>
       </div>

@@ -12,8 +12,8 @@ const FilterPanel = ({
   setSelectedAvailability,
   minRating,
   setMinRating,
-  maxFee,
-  setMaxFee,
+  selectedFeeRange,
+  setSelectedFeeRange,
   isMobile,
   selectedCategory,
   setSelectedCategory,
@@ -71,11 +71,11 @@ const FilterPanel = ({
       />
 
       <SelectField
-        name="maxFee"
-        label="Max Fee ($)"
-        value={maxFee ? `$${maxFee}` : ""}
-        onChange={(e) => setMaxFee(e.target.value.replace(/[^\d]/g, ""))}
-        options={["$100", "$200", "$500", "$1000", "$2000", "$5000", "$5000+"]}
+        name="feeRange"
+        label="Fee Range ($)"
+        value={selectedFeeRange}
+        onChange={(e) => setSelectedFeeRange(e.target.value)}
+        options={["$500-$1,000", "$2,000-$5,000", "$5,000+"]}
         placeholder="Any"
       />
 

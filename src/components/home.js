@@ -6,6 +6,7 @@ import HeroSection from "./hero/hero";
 import ArtistCategory from "./artist-categories/artist-category";
 import Navbar from "./navbar/navbar";
 import HowItWorksSection from "./how-it-works/how-it-works";
+import ChatbotPopup from "@/components/chatbot-popup";
 
 import dynamic from "next/dynamic";
 
@@ -21,6 +22,7 @@ export default function HomePage() {
       <HowItWorksSection />
       <ArtistCategory />
       <TestimonialSection />
+      <ChatbotPopup />
       <Footer />
     </div>
   );
