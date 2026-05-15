@@ -97,7 +97,7 @@ Artistly ensures high-quality profiles using ML-based validation.
 
 ## 🎥 Project Demo
 
-[![Watch the demo video](/../artistly/public/screenshots/hero_section.png)](https://www.youtube.com/watch?v=2rOZXsLHYWs)
+![Watch the demo video](/public/screenshots/hero_section.png)(https://www.youtube.com/watch?v=2rOZXsLHYWs)
 
 👉 [https://www.youtube.com/watch?v=2rOZXsLHYWs](https://www.youtube.com/watch?v=2rOZXsLHYWs)
 
